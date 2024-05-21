@@ -5,7 +5,7 @@ Here's a demo application that demonstrates how to hook up OpenTelemetry to an a
 
 ## Get Started
 
-#### Pre-requisites 
+### Pre-requisites 
 
 This project was initially generated from [start.spring.io](https://start.spring.io). It uses Maven and Java 17, so ensure those are set up and available. 
 
@@ -33,7 +33,15 @@ Once that's set, start up the infrastructure
 docker-compose up -d # that will start it up detached from your shell, remove `-d` to run in foreground
 ```
 
-With that started up, you are ready to run the application and inspect spans. 
+#### AMQ configuration
+
+Let's create our queues....
+Go to http://localhost:8161/admin/queues.jsp and create two queues
+JOKES and TEST_Q.
+
+![img.png](assets/img.png)
+
+Now that we have queues and our infra is up, you are ready to run the application and inspect spans. 
 
 ### Application
 
