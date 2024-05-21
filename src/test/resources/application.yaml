@@ -1,0 +1,6 @@
+queue:
+  name: "activemq:queue:JOKES"
+
+srv:
+  downstreamEndpoint: https://ejbtechsolutions.com/maddadjokes
+  downstreamEndpoint2: https://weathermateplus.com/api # ?lat=35.678&lng=-92.345

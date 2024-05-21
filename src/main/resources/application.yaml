@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: otel-camel-demo
+
+camel:
+  springboot:
+    main-run-controller: true
+  component:
+    activemq:
+      broker-url: tcp://broker:61616
+      username: ${BROKER_USERNAME:}
+      password: ${BROKER_PASSWORD:}
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m traceId=%X{trace_id} spanId=%X{span_id} %n%wEx"
+  level:
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    io.opentelemetry: DEBUG
+
+srv:
+  downstreamEndpoint: https://ejbtechsolutions.com/maddadjokes
+  downstreamEndpoint2: https://weathermateplus.com/api # ?lat=35.678&lng=-92.345
+
+timer:
+  period: 5000
+
+queue:
+  name: ${QUEUE_NAME:JOKES}
