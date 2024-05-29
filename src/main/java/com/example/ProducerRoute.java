@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 public class ProducerRoute extends RouteBuilder {
 
     private final ServiceProperties serviceProperties;
+    private final WeatherLocation weatherLocation;
 
-    public ProducerRoute(ServiceProperties serviceProperties) {
+    public ProducerRoute(ServiceProperties serviceProperties, WeatherLocation weatherLocation) {
         this.serviceProperties = serviceProperties;
+        this.weatherLocation = weatherLocation;
     }
 
     @Override
@@ -24,10 +26,14 @@ public class ProducerRoute extends RouteBuilder {
                 .routeId("activemq-producer")
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
                 .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
-                .to(serviceProperties.getDownstreamEndpoint2()+"?lat=40.7517699&lng=-74.0526467") // just going to check empire state building weather.
+                .to(weatherUrl())
                 .convertBodyTo(String.class)
                 .log(LoggingLevel.INFO, "Sending ${body} to ActiveMQ")
                 .to("activemq:queue:TEST_Q");
+    }
+
+    private String weatherUrl() {
+        return serviceProperties.getDownstreamEndpoint2()+"?lat=" + weatherLocation.getLatitude() + "&lng=" + weatherLocation.getLongitude();
     }
 
 }

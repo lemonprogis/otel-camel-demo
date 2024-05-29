@@ -10,10 +10,14 @@ camel:
       broker-url: tcp://broker:61616
       username: ${BROKER_USERNAME:}
       password: ${BROKER_PASSWORD:}
+  main:
+    use-mdc-logging: true
+    mdc-logging-keys-pattern: "*"
 
 logging:
   pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m traceId=%X{trace_id} spanId=%X{span_id} %n%wEx"
+    # console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m traceId=%X{trace_id} spanId=%X{span_id} %n%wEx"
+    level: "%5p [${spring.application.name:},trace_id=%X{trace_id:-},span_id=%X{span_id:-}]"
   level:
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
     io.opentelemetry: DEBUG
@@ -21,6 +25,11 @@ logging:
 srv:
   downstreamEndpoint: https://ejbtechsolutions.com/maddadjokes
   downstreamEndpoint2: https://weathermateplus.com/api # ?lat=35.678&lng=-92.345
+
+# just going to check empire state building weather.
+weather:
+  latitude: 40.7517699
+  longitude: -74.0526467
 
 timer:
   period: 5000

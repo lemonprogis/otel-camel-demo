@@ -19,8 +19,8 @@ Within your IDE set environment variables for OpenTelemetry, and ActiveMQ.
 # this is used to add the jar on the class path to auto instrument our application.
 JAVA_TOOL_OPTIONS=-javaagent:${pwd}/otel-camel-demo/opentelemetry-javaagent.jar
 # these are for where to sent traces.
-OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
 OTEL_METRICS_EXPORTER=none
+OTEL_LOGS_EXPORTER=none
 OTEL_SERVICE_NAME=otel-camel-demo
 # amq variables
 BROKER_URL=tcp://localhost:61616
