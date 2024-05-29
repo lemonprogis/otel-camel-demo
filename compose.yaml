@@ -27,12 +27,3 @@ services:
     ports:
       - "61616:61616"
       - "8161:8161"
-  #app:
-  #  build:
-  #    context: .
-  #  env_file:
-  #    - .env
-  #  ports:
-  #    - "8080:8080"
-  #  volumes:
-  #    - ./opentelemetry-javaagent.jar:/app/opentelemetry-javaagent.jar
