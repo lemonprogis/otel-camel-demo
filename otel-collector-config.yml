@@ -2,12 +2,14 @@ receivers:
   otlp:
     protocols:
       grpc:
+      http:
 exporters:
-  otlp:
-    endpoint: jaeger:14250
+  otlp/jaeger:
+    endpoint: jaeger:4317
     tls:
       insecure: true
   logging:
+    loglevel: debug
 processors:
   batch:
 extensions:
@@ -18,5 +20,5 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [otlp, logging]
+      exporters: [otlp/jaeger, logging]
       processors: [batch]

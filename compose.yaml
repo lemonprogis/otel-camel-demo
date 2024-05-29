@@ -1,13 +1,15 @@
+version: "3"
+
 services:
   # Jaeger
   jaeger:
     image: jaegertracing/all-in-one:latest
     ports:
       - "16686:16686"
-      - "14250"
+      - "14250:14250"
   # Otel collector
   otel-collector:
-    image: otel/opentelemetry-collector:latest
+    image: otel/opentelemetry-collector-contrib:latest
     command: [ "--config=/etc/otel-collector-config.yml" ]
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
@@ -25,3 +27,12 @@ services:
     ports:
       - "61616:61616"
       - "8161:8161"
+  #app:
+  #  build:
+  #    context: .
+  #  env_file:
+  #    - .env
+  #  ports:
+  #    - "8080:8080"
+  #  volumes:
+  #    - ./opentelemetry-javaagent.jar:/app/opentelemetry-javaagent.jar
