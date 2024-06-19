@@ -3,7 +3,6 @@ package com.example;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.opentelemetry.OpenTelemetryTracer;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,8 +18,6 @@ public class ProducerRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        OpenTelemetryTracer ott = new OpenTelemetryTracer();
-        ott.init(this.getContext());
 
         from("timer:hello?period={{timer.period}}")
                 .routeId("activemq-producer")
